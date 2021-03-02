@@ -560,8 +560,8 @@ function Charts() {
             maxDate={visitorsData.maxDate}
             data={visitorsData}
             title={"Visitors"}
-            colors={["cyan"]}
-            gradient={"rgba(29, 62, 78,0.8)"}
+            colors={["rgb(0, 255, 255)"]}
+            gradient={["rgba(0, 255, 255,0)"]}
           />
         )}
         {ordersSubscData && ordersSubscData.startDate && (
@@ -574,8 +574,8 @@ function Charts() {
             maxDate={ordersSubscData.maxDate}
             data={ordersSubscData}
             title={"Multi Data"}
-            colors={["#d1d859", "#80c342"]}
-            gradient={"rgba(29, 62, 78,0.1)"}
+            colors={["rgb(209, 216, 89)", "rgb(128, 195, 66)"]}
+            gradient={["rgba(209, 216, 89,0)", "rgba(128, 195, 66,0)"]}
           />
         )}
       </div>

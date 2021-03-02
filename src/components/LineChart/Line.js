@@ -17,11 +17,11 @@ class Line extends Component {
   initialChart() {
     const ctx = this.chartRef.current.getContext("2d");
 
-    const setGradientColor = (canvas, color) => {
+    const setGradientColor = (canvas, color,i) => {
       const gradient = ctx.createLinearGradient(0, 0, 0, 320);
 
       gradient.addColorStop(0.6, color);
-      gradient.addColorStop(1, this.props.gradient);
+      gradient.addColorStop(1, this.props.gradient[i]);
 
       return gradient;
     };
@@ -32,7 +32,7 @@ class Line extends Component {
       if (data.datasets) {
         let colors = this.props.colors;
         data.datasets.forEach((set, i) => {
-          set.backgroundColor = setGradientColor(canvas, colors[i]);
+          set.backgroundColor = setGradientColor(canvas, colors[i],i);
 
           set.borderColor = colors[i];
 
