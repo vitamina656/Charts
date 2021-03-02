@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 10px;
+    margin: 40px 0 20px 0;
 }
 .rightChartsColumn{
     grid-area:right;
@@ -44,5 +44,75 @@
     position: relative;
     flex-direction: column;
     align-items: center;
-    padding: 0 10px;
+    margin: 40px 0 0 0;
+    padding: 20px;
+    background: linear-gradient(to top,#1d3e4e,rgba(29,62,78,.8));
+}
+.lastEventsWrapper{
+    position: fixed;
+    top:420px;
+}
+
+.lastEvents{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 430px;
+    height: 300px;
+    overflow-y: scroll;
+    color:#fff;
+
+
+}
+.lastEvents::-webkit-scrollbar {
+    width: 0.3em;
+  }
+   
+  .lastEvents::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #ccc;
+    border-radius: 8px;
+  }
+   
+  .lastEvents::-webkit-scrollbar-thumb {
+    background-color:#fff;
+    outline: 1px solid rgba(29, 62, 78,1);
+    border-radius: 8px;
+  }
+.lastEventsPoint{
+    position:relative;
+    width: 65%;
+
+}
+.lastEventsPointV::before{
+   content: "";
+   position:absolute;
+   width: 4px;
+   height: 20px;
+   left:-10px;
+   top:3px;
+   background-color: rgb(0, 255, 255);
+   border-radius: 3px;
+
+}
+.lastEventsPointO::before{
+    content: "";
+    position:absolute;
+    width: 4px;
+    height: 20px;
+    left:-10px;
+    top:3px;
+    background-color: rgb(128, 195, 66);
+    border-radius: 3px;
+
+}
+.lastEventsPointS::before{
+
+    content: "";
+    position:absolute;
+    width: 4px;
+    height: 20px;
+    left:-10px;
+    top:3px;
+    background-color: rgb(209, 216, 89);
+    border-radius: 3px;
 }

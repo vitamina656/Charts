@@ -137,37 +137,39 @@ function Charts() {
     });
   }
   const newStartDay = (checked) => {
-    function getNewDays(selectedDay,maxDay) {
-     
+    function getNewDays(selectedDay, maxDay) {
       let newDays = [];
       return (newDays = {
         newDaysVisitors: optionState.visitors.allDays.filter(
-          (item) => item.x >= selectedDay && item.x<=maxDay
+          (item) => item.x >= selectedDay && item.x <= maxDay
         ),
 
         newDaysOrders: optionState.orders.allDays.filter(
-          (item) => item.x >= selectedDay && item.x<=maxDay
+          (item) => item.x >= selectedDay && item.x <= maxDay
         ),
         newDaysSubscriptions: optionState.subscriptions.allDays.filter(
-          (item) => item.x >= selectedDay && item.x<=maxDay
+          (item) => item.x >= selectedDay && item.x <= maxDay
         ),
       });
-    };
-    // function getNewData(name,selectedDay,maxDay) {
-    //   console.log(name);
-    //   let newDays = [];
-    //   return [name].filter(
-    //       (item) => item.x >= selectedDay && item.x<=maxDay
-    //     )
-      
-    // }
+    }
+    function getNewData(name, selectedDay, maxDay) {
+      let newDays = name;
+      newDays = newDays.filter(
+        (item) => item.x >= selectedDay && item.x <= maxDay
+      );
+
+      return newDays;
+    }
     if (checked === "day") {
       setSelectDay({
         ...daySelect,
         unit: "hour",
       });
 
-      let newDays = getNewDays(daySelect.today,new Date(moment(daySelect.today).endOf("day")));
+      let newDays = getNewDays(
+        daySelect.today,
+        new Date(moment(daySelect.today).endOf("day"))
+      );
 
       setVisitorsData({
         ...visitorsData,
@@ -175,7 +177,11 @@ function Charts() {
         maxDate: new Date(moment(daySelect.today).endOf("day")),
         datasets: [
           {
-            data: optionState.visitors.dataHour,
+            data: getNewData(
+              optionState.visitors.dataHour,
+              daySelect.today,
+              new Date(moment(daySelect.today).endOf("day"))
+            ),
           },
         ],
       });
@@ -188,11 +194,19 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataHour,
+            data: getNewData(
+              optionState.subscriptions.dataHour,
+              daySelect.today,
+              new Date(moment(daySelect.today).endOf("day"))
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataHour,
+            data: getNewData(
+              optionState.orders.dataHour,
+              daySelect.today,
+              new Date(moment(daySelect.today).endOf("day"))
+            ),
           },
         ],
       });
@@ -219,7 +233,10 @@ function Charts() {
         ...daySelect,
         unit: "day",
       });
-      let newDays = getNewDays(daySelect.thisWeek,new Date(moment(daySelect.today).endOf("isoweek")));
+      let newDays = getNewDays(
+        daySelect.thisWeek,
+        new Date(moment(daySelect.today).endOf("isoweek"))
+      );
 
       setVisitorsData({
         ...visitorsData,
@@ -227,7 +244,11 @@ function Charts() {
         maxDate: new Date(moment(daySelect.today).endOf("isoweek")),
         datasets: [
           {
-            data: optionState.visitors.dataDays,
+            data: getNewData(
+              optionState.visitors.dataDays,
+              daySelect.thisWeek,
+              new Date(moment(daySelect.today).endOf("isoweek"))
+            ),
           },
         ],
       });
@@ -239,11 +260,19 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataDays,
+            data: getNewData(
+              optionState.subscriptions.dataDays,
+              daySelect.thisWeek,
+              new Date(moment(daySelect.today).endOf("isoweek"))
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataDays,
+            data: getNewData(
+              optionState.orders.dataDays,
+              daySelect.thisWeek,
+              new Date(moment(daySelect.today).endOf("isoweek"))
+            ),
           },
         ],
       });
@@ -271,7 +300,10 @@ function Charts() {
         unit: "day",
       });
 
-      let newDays = getNewDays(daySelect.thisMonth, new Date(moment(daySelect.today).endOf("month")));
+      let newDays = getNewDays(
+        daySelect.thisMonth,
+        new Date(moment(daySelect.today).endOf("month"))
+      );
 
       setVisitorsData({
         ...visitorsData,
@@ -279,7 +311,11 @@ function Charts() {
         maxDate: new Date(moment(daySelect.today).endOf("month")),
         datasets: [
           {
-            data: optionState.visitors.dataDays,
+            data: getNewData(
+              optionState.visitors.dataDays,
+              daySelect.thisMonth,
+              new Date(moment(daySelect.today).endOf("month"))
+            ),
           },
         ],
       });
@@ -291,11 +327,19 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataDays,
+            data: getNewData(
+              optionState.subscriptions.dataDays,
+              daySelect.thisMonth,
+              new Date(moment(daySelect.today).endOf("month"))
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataDays,
+            data: getNewData(
+              optionState.orders.dataDays,
+              daySelect.thisMonth,
+              new Date(moment(daySelect.today).endOf("month"))
+            ),
           },
         ],
       });
@@ -323,15 +367,26 @@ function Charts() {
         unit: "day",
       });
 
-      let newDays = getNewDays(daySelect.lastMonth,new Date( moment(daySelect.today).subtract(1, "months").endOf("month")));
+      let newDays = getNewDays(
+        daySelect.lastMonth,
+        new Date(moment(daySelect.today).subtract(1, "months").endOf("month"))
+      );
 
       setVisitorsData({
         ...visitorsData,
         startDate: daySelect.lastMonth,
-        maxDate: new Date( moment(daySelect.today).subtract(1, "months").endOf("month")),
+        maxDate: new Date(
+          moment(daySelect.today).subtract(1, "months").endOf("month")
+        ),
         datasets: [
           {
-            data: optionState.visitors.dataDays,
+            data: getNewData(
+              optionState.visitors.dataDays,
+              daySelect.lastMonth,
+              new Date(
+                moment(daySelect.today).subtract(1, "months").endOf("month")
+              )
+            ),
           },
         ],
       });
@@ -345,11 +400,23 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataDays,
+            data: getNewData(
+              optionState.subscriptions.dataDays,
+              daySelect.lastMonth,
+              new Date(
+                moment(daySelect.today).subtract(1, "months").endOf("month")
+              )
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataDays,
+            data: getNewData(
+              optionState.orders.dataDays,
+              daySelect.lastMonth,
+              new Date(
+                moment(daySelect.today).subtract(1, "months").endOf("month")
+              )
+            ),
           },
         ],
       });
@@ -377,7 +444,10 @@ function Charts() {
         unit: "month",
       });
 
-      let newDays = getNewDays(daySelect.thisYear,new Date(moment(daySelect.today).add(1, "M")));
+      let newDays = getNewDays(
+        daySelect.thisYear,
+        new Date(moment(daySelect.today).add(1, "M"))
+      );
 
       setVisitorsData({
         ...visitorsData,
@@ -385,7 +455,11 @@ function Charts() {
         maxDate: new Date(moment(daySelect.today).add(1, "M")),
         datasets: [
           {
-            data: optionState.visitors.dataMonth,
+            data: getNewData(
+              optionState.visitors.dataMonth,
+              daySelect.thisYear,
+              new Date(moment(daySelect.today).add(1, "M"))
+            ),
           },
         ],
       });
@@ -397,11 +471,19 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataMonth,
+            data: getNewData(
+              optionState.subscriptions.dataMonth,
+              daySelect.thisYear,
+              new Date(moment(daySelect.today).add(1, "M"))
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataMonth,
+            data: getNewData(
+              optionState.orders.dataMonth,
+              daySelect.thisYear,
+              new Date(moment(daySelect.today).add(1, "M"))
+            ),
           },
         ],
       });
@@ -429,7 +511,10 @@ function Charts() {
         unit: "month",
       });
 
-      let newDays = getNewDays(daySelect.lastYear,new Date(moment(daySelect.lastYear).endOf("year")));
+      let newDays = getNewDays(
+        daySelect.lastYear,
+        new Date(moment(daySelect.lastYear).endOf("year"))
+      );
 
       setVisitorsData({
         ...visitorsData,
@@ -438,7 +523,11 @@ function Charts() {
         maxDate: new Date(moment(daySelect.lastYear).endOf("year")),
         datasets: [
           {
-            data: optionState.visitors.dataMonth,
+            data: getNewData(
+              optionState.visitors.dataMonth,
+              daySelect.lastYear,
+              new Date(moment(daySelect.lastYear).endOf("year"))
+            ),
           },
         ],
       });
@@ -451,11 +540,19 @@ function Charts() {
         datasets: [
           {
             label: "Subscriptions",
-            data: optionState.subscriptions.dataMonth,
+            data: getNewData(
+              optionState.subscriptions.dataMonth,
+              daySelect.lastYear,
+              new Date(moment(daySelect.lastYear).endOf("year"))
+            ),
           },
           {
             label: "Orders",
-            data: optionState.orders.dataMonth,
+            data: getNewData(
+              optionState.orders.dataMonth,
+              daySelect.lastYear,
+              new Date(moment(daySelect.lastYear).endOf("year"))
+            ),
           },
         ],
       });
@@ -482,8 +579,6 @@ function Charts() {
         ...daySelect,
         unit: "month",
       });
-
-      
 
       setVisitorsData({
         ...visitorsData,
@@ -544,10 +639,8 @@ function Charts() {
               newStartDay(e.target.value);
             }}
           />
-          <div>Today:{" "}{moment(daySelect.today).format("MMM Do YY")}</div>
+          <div>Today: {moment(daySelect.today).format("MMM Do YY")}</div>
         </div>
-        
-        
       </div>
       <div className={styles.leftChartsColumn}>
         {visitorsData && visitorsData.startDate && (
@@ -581,12 +674,51 @@ function Charts() {
       </div>
       <div className={styles.rightChartsColumn}>
         {dougChartData && (
-          <Doughnut
-            id="doughnut"
-            data={dougChartData.data}
-            title="Total Events"
-          />
+          <Doughnut id="doughnut" data={dougChartData.data} title="Total" />
         )}
+        <div className={styles.lastEventsWrapper}>
+          <div className={styles.lastEvents}>
+            {optionState &&
+              optionState.visitors &&
+              optionState.visitors.allDays
+                .slice(0)
+                .reverse()
+                .map((item, index) => {
+                  return index < 3 ? (
+                    <p className={styles.lastEventsPoint} key={index + "V"}>
+                      <span className={styles.lastEventsPointV}></span>{" "}
+                      {moment(item.x).format("DD MMMM YYYY' hA")}
+                    </p>
+                  ) : null;
+                })}
+            {optionState &&
+              optionState.orders &&
+              optionState.orders.allDays
+                .slice(0)
+                .reverse()
+                .map((item, index) => {
+                  return index < 3 ? (
+                    <p className={styles.lastEventsPoint} key={index + "O"}>
+                      <span className={styles.lastEventsPointO}></span>{" "}
+                      {moment(item.x).format("DD MMMM YYYY' hA")}
+                    </p>
+                  ) : null;
+                })}
+            {optionState &&
+              optionState.subscriptions &&
+              optionState.subscriptions.allDays
+                .slice(0)
+                .reverse()
+                .map((item, index) => {
+                  return index < 3 ? (
+                    <p className={styles.lastEventsPoint} key={index + "S"}>
+                      <span className={styles.lastEventsPointS}></span>{" "}
+                      {moment(item.x).format("DD MMMM YYYY' hA")}
+                    </p>
+                  ) : null;
+                })}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,9 +3,8 @@
         flex-direction: column;
         position: fixed;
        
-        margin: 40px 0 20px 0;
-        padding: 20px ;
-        background: linear-gradient(to top,#1d3e4e,rgba(29,62,78,.8));
+        margin: 40px 0 20px 0; 
+        
         height: 360px;
         width: 430px;
     
